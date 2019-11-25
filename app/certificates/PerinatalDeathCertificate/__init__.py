@@ -1,0 +1,1 @@
+from app.certificates.PerinatalDeathCertificate.models import PerinatalDeathCertificateModel

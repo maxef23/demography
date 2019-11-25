@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.page {
+    position: relative;
+    box-sizing: border-box;
+    width: 210mm;
+    height: 297mm;
+    margin: 50px auto;
+
+    border: 1px solid rgba(0, 0, 0, 0.4);
+
+    font-size: 8pt;
+}
+
+.test-print {
+    width: 300mm;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(54.7369882619deg);
+
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 30pt;
+    letter-spacing: 50px;
+    color: rgba(0, 0, 0, .5);
+}
+
+.page-left {
+    padding: 6mm 7mm 7mm 18mm;
+}
+
+.page-right {
+    padding: 6mm 18mm 7mm 7mm;
+}
+
+.top {
+    height: 430px;
+}
+
+.cut-line {
+    width: calc(100% - 21mm - 28px);
+    position: absolute;
+    top: 420px;
+
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px dashed black;
+}
+
+.bottom {
+    page-break-after: always;
+}
+
+.underline {
+    display: inline;
+    text-decoration: underline;
+}
+
+.underline:empty {
+    display: inline-block;
+    border-bottom: 1px solid black;
+}
+
+.checkbox {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.fwb {
+    font-weight: bold;
+}
+
+.fs7 {
+    font-size: 7pt;
+}
+
+.fs75 {
+    font-size: 7.5pt;
+}
+
+.fs8 {
+    font-size: 8pt;
+}
+
+.fs85 {
+    font-size: 8.5pt;
+}
+
+.fs9 {
+    font-size: 9pt;
+}
+
+.fs10 {
+    font-size: 10pt;
+}
+
+.fs11 {
+    font-size: 11pt;
+}
+
+.fs12 {
+    font-size: 11pt;
+}
+
+.tac {
+    text-align: center;
+}
+
+.dib {
+    display: inline-block;
+}
+
+.ml3 {
+    margin-left: 3mm;
+}
+
+.line-spacing-proportional12 {
+    line-height: 10.8pt;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.table-cell--border {
+    border: 1px solid black;
+}
+
+.table-cell--border-right {
+    border-right: 1px solid black;
+}
+
+.table-cell--border-bottom {
+    border-bottom: 1px solid black;
+}

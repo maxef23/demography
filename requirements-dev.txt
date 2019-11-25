@@ -1,0 +1,4 @@
+# -r requirements.txt
+
+Fabric3==1.14.post1
+fabric3-virtualenv==0.3.1

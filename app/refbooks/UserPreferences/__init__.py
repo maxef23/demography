@@ -1,0 +1,1 @@
+from app.refbooks.UserPreferences.models import UserPreferencesModel

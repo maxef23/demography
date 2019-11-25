@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bc.css') }}">
+  <link rel="stylesheet" type="text/css" media="print" href="{{ url_for('static', filename='print.css') }}">
+</head>
+<body>
+  <div class="document">
+    <div class="page">
+      <div class="top">
+        <div class="top-header">
+          <div class="top-header-text">
+            Приложение №2<br>
+            к приказу Министерства здравоохранения и<br>
+            социального развития Российской Федерации<br>
+            от 27 декабря 2011 г. № 1687н<br>
+            ФОРМА №103/У
+          </div>          
+        </div>
+
+        <div class="top-certificate">
+          <div class="certificate-number-s">{{ SERIAL }}</div>
+          <div class="certificate-number-n">{{ NUMBER }}</div>
+        </div>
+
+
+        <div class="top-content fs9 line-spacing">
+          <div class="tac">
+            Дата выдачи
+            «{{ uw(DDD, '30px') }}»
+            {{ uw(DDM, '90px') }}
+            {{ '20 ' if not DDY }}{{ uw(DDY, '18px') }} г .
+          </div>
+          <div style="padding-left: 20mm;">      
+            <div>
+              <span class="fwb">1.&nbsp;&nbsp;</span>
+              Ребенок родился:
+              число {{ uw(CBDD, '42px') }},
+              месяц {{ uw(mon_name(CBDM), '84px') }},
+              год {{ uw(CBDY, '42px') }},
+              час {{ uw(CBT_H, '60px') }},
+              мин. {{ uw(CBT_M, '66px') }}
+            </div>
+            <div>
+              <span class="fwb">2.&nbsp;&nbsp;</span>
+              Фамилия, имя, отчество матери {{ uw(MTHR_NAME, '456px') }}
+            </div>
+            <div>
+              <span class="fwb">3.&nbsp;&nbsp;</span>
+              Дата рождения матери:
+              число {{ uw(M_BDD, '42px') }},
+              месяц {{ uw(mon_name(M_BDM), '72px') }},
+              год {{ uw(M_BDY, '90px') }}
+            </div>
+            <div>
+              <span class="fwb">4.&nbsp;&nbsp;</span>
+              Место постоянного жительства (регистрации) матери ребенка:
+              <div style="margin-left: 7.4mm;">
+                  республика, край, область {{ uw(MRR, '174px') }}
+                  район {{ uw(MRA, '192px') }}
+              </div>
+              <div style="margin-left: 7.4mm;">
+                  город (село) {{ uw(MRC, '150px') }}
+                  улица {{ uw(MRS, '102px') }}
+                  дом {{ uw(MRH, '126px') }}
+                  кв. {{ uw(MRF, '60px') }}
+                </div>
+            </div>
+            <div>
+              <span class="fwb">5.&nbsp;&nbsp;</span>
+              Местность:&nbsp;&nbsp;
+              городская&nbsp; {{ ch(MLOC == 1) }} ,&nbsp;&nbsp;
+              сельская&nbsp; {{ ch(MLOC == 2) }}
+            </div>
+            <div>
+              <span class="fwb">6.&nbsp;&nbsp;</span>
+              Пол:&nbsp;&nbsp; мальчик&nbsp; {{ ch(SEX == 1) }} ,&nbsp;&nbsp; девочка&nbsp; {{ ch(SEX == 2) }}
+            </div>
+          </div>
+        </div>
+      </div>
+               
+      <div class="bottom">
+        <div class="bottom-header">
+          <div class="bottom-header-table">
+            <table class="table" width="748" cellpadding="4" cellspacing="0">
+            <colgroup>
+              <col width="410"/>
+              <col width="10"/>
+              <col width="220"/>
+            </colgroup>
+            <tbody>
+              <tr valign="top">
+                <td class="table-cell--border fs9" style="padding: 2px 13px; letter-spacing: -.3px;">
+                  Министерство здравоохранения и социального развития
+                  Российской Федерации
+                </td>
+                <td></td>
+                <td  class="table-cell--border" style="padding: 2px 5px; letter-spacing: -.3px;">
+                  Код формы по ОКУД <div class="underline" style="width: 118px"></div><br>
+                  Медицинская документация
+                </td>
+              </tr>
+              <tr>
+                <td  class="table-cell--border" style="padding-left: 10px">
+                  Наименование медицинской организации<br>
+                  {{ uw(ORG_NAME, '367px') }}<br>
+                  Адрес {{ uw(ORG_ADDR, '341px') }}<br>
+                  Код по ОКПО {{ uw(ORG_OKPO, '303px') }}<br>
+                  Для индивидульаного предпринимателя, осуществляющего медицинскую деятельность: номер и дата<br>
+                  выдачи лицензии на осуществление медицинской деятельности<div class="underline" style="width: 154px"></div><br>
+                  <!-- Для врача, занимающегося частной практикой:<br>
+                  номер лицензии на медицинскую деятельность -->
+                  Адрес<div class="underline" style="width: 346px"></div>
+                </td>
+                <td></td>
+                <td  class="table-cell--border" valign="top" style="letter-spacing: -.2px; line-height: 14px; padding-top: 2px;">
+                    Форма N 103/У<br>
+                    Утверждена приказом Министерства здравоохранения и<br>
+                    социального развития Российской Федерации<br>
+                    от 27 декабря 2011 г. N 1687н
+                </td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bottom-certificate">
+          <div class="certificate-number-s">{{ SERIAL }}</div>
+          <div class="certificate-number-n">{{ NUMBER }}</div>
+        </div>
+        
+        <div class="bottom-content">
+          <div class="tac fs9">            
+            Дата выдачи
+            «{{ uw(DDD, '30px') }}»
+            {{ uw(DDM, '120px') }}
+            {{ '20 ' if not DDY }}{{ uw(DDY, '18px') }} г.
+          </div>
+          <div style="padding-left: 20mm;">
+            <div class="fs9">
+              &nbsp;<br>
+              &nbsp;<br>
+              <span class="fwb">1.</span>
+              Ребенок родился:
+              число {{ uw(CBDD, '36px') }},
+              месяц {{ uw(mon_name(CBDM), '102px') }},
+              год {{ uw(CBDY, '36px') }},
+              час {{ uw(CBT_H, '42px') }},
+              мин. {{ uw(CBT_M, '42px') }}<br>
+              &nbsp;
+            </div>        
+          
+            <table class="table fs9" width="711" cellpadding="4" cellspacing="0">
+              <colgroup>
+                <col width="348"/>
+                <col width="346"/>
+              </colgroup>
+              <tbody>
+                <tr valign="top">
+                  <td class="table-cell--border-bottom" width="348" height="6">
+                    <div class="fwb tac">
+                      Мать
+                    </div>
+                  </td>
+                  <td class="table-cell--border-bottom" width="346">
+                    <div class="fwb tac">
+                      Ребенок
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr valign="top">
+                  <td class="table-cell--border-right line-spacing" width="348" height="19">
+                    <span class="fwb">2.</span>
+                    Фамилия, имя, отчество {{ uw(MTHR_FN, '198px') }}<br>
+                    {{ uw(MTHR_NSN, '336px') }}
+
+                    <table style="margin-top: .3rem; border-collapse: collapse;" width="351" cellpadding="4" cellspacing="0">
+                      <colgroup>
+                        <col width="141"/>
+                        <col width="14"/>
+                        <col width="15"/>
+                        <col width="2"/>
+                        <col width="15"/>
+                        <col width="15"/>
+                        <col width="2"/>
+                        <col width="15"/>
+                        <col width="15"/>
+                        <col width="15"/>
+                        <col width="14"/>
+                      </colgroup>
+                      <tbody>
+                        <tr valign="top">
+                          <td style="padding-left: 0;" width="141" height="9">
+                            <span class="fwb">3.</span> Дата рождения
+                          </td>
+                          <td class="table-cell--border" width="14" height="9">{{ SMBDD[-2:-1] if SMBDD else '' }}</td>
+                          <td class="table-cell--border" width="15">{{ SMBDD[-1:] if SMBDD else '' }}</td>
+                          <td width="2"></td>
+                          <td class="table-cell--border" width="15">{{ SMBDM[-2:-1] if SMBDM else '' }}</td>
+                          <td class="table-cell--border" width="15">{{ SMBDM[-1:] if SMBDM else '' }}</td>
+                          <td width="2"></td>
+                          <td class="table-cell--border" width="15">{{ SMBDY[-4:-3] if SMBDY else '' }}</td>
+                          <td class="table-cell--border" width="15">{{ SMBDY[-3:-2] if SMBDY else '' }}</td>
+                          <td class="table-cell--border" width="15">{{ SMBDY[-2:-1] if SMBDY else '' }}</td>
+                          <td class="table-cell--border" width="14">{{ SMBDY[-1:] if SMBDY else '' }}</td>
+                        </tr>
+                        <tr valign="top">
+                          <td></td>                    
+                          <td class="tac" colspan="2">число</td>
+                          <td></td>
+                          <td class="tac" colspan="2">месяц</td>
+                          <td></td>
+                          <td class="tac" colspan="4">год</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    
+                    <span class="fwb">4.</span>
+                    Место постоянного жительства (регистрации):<br>
+                    <div class="ml38">
+                      республика, край, область {{ uw(MRR, '180px') }}
+                    </div>
+                    <div class="ml38">
+                      район {{ uw(MRA, '283px') }}
+                    </div>
+                    <div class="ml38">
+                      город (село) {{ uw(MRC, '251px') }}
+                    </div>
+                    <div class="ml38">
+                      улица {{ uw(MRS, '165px') }}
+                      дом {{ uw(MRH, '36px') }}
+                      кв. {{ uw(MRF, '36px') }}
+                    </div>
+                    <div>
+                      <span class="fwb">5.</span>
+                      Местность: городская {{ ch(MLOC == 1) }} , сельская {{ ch(MLOC == 2) }}
+                    </div>
+                    <div>
+                      <span class="fwb">6.</span>
+                      Семейное положение: состоит в зарегистрированном браке {{ ch(MMS == 1) }} ,
+                      <div class="ml38">
+                        не состоит в зарегистрированном браке {{ ch(MMS == 2) }} ,
+                        неизвестно {{ ch(MMS == 3) }}
+                      </div>
+                    </div>
+                  </td>
+          
+                  <td class="line-spacing" width="346">
+                    <span class="fwb">11.</span>
+                    Фамилия ребенка {{ uw(CFN, '220px') }}
+                    <div class="underline" style="width: 330px;"></div>
+
+                    <span class="fwb">12.</span>
+                    Место рождения:
+                    <div style="margin-left: 4.3mm">
+                      республика, край, область {{ uw(CRR, '180px') }}
+                    </div>
+                    <div style="margin-left: 4.3mm">
+                      район {{ uw(CRA, '282px') }}
+                    </div>
+                    
+                    <div style="margin-left: 4.3mm">
+                      город (село) {{ uw(CRC, '250px') }}
+                    </div>
+                    &nbsp;
+                    <div>
+                      <span class="fwb">13.</span>
+                      Местность: городская {{ ch(CLOC==1) }} , сельская {{ ch(CLOC==2) }}
+                    </div>
+                    <span class="fwb">14.</span>
+                    Роды произошли:
+                    <div>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; в стационаре {{ ch(BP==1) }} , дома {{ ch(BP==2) }} , в другом месте {{ ch(BP==3) }} ,
+                    </div>
+                    <div>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; неизвестно {{ ch(BP==4) }}
+                    </div>
+                    <div>
+                      <span class="fwb">15.</span>
+                      Пол: &nbsp;&nbsp;&nbsp; мальчик {{ ch(SEX==1) }} , &nbsp;&nbsp;&nbsp; девочка {{ ch(SEX==2) }}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {% if FOR_TEST %}<div class="test-print">{{ FOR_TEST_TEXT }}</div>{% endif %}
+    </div>
+    
+    
+    <div class="page" style="padding: 10mm 7mm 14mm 20mm;">
+      <div class="top fs9">
+        <div style="text-align: right; margin-bottom: 1cm;">
+          оборотная сторона
+        </div>
+        <div>
+          <span class="fwb">7.&nbsp;&nbsp;</span>
+          Роды произошли:
+          в стационаре {{ ch(BP==1) }} ,
+          дома {{ ch(BP==2) }} ,
+          в другом месте {{ ch(BP==3) }} ,
+          неизвестно {{ ch(BP==4) }}
+        </div>
+        &nbsp;<br>
+        &nbsp;
+        <div>
+          <span class="fwb">8.</span>
+          <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="width: 252px;">
+                    <div class="underline">{{ FBC_POST }}</div>
+                    <br>
+                    <div class="tac dib fs75">
+                        (должность врача (фельдшера, акушерки), заполнившего медицинское свидетельство)
+                    </div>
+                </td>
+                <td style="width: 150px;">
+                    <div class="underline" style="width: 138px;"></div>
+                    <br>
+                    <div class="tac dib fs75"> (подпись) </div>
+                </td>
+                <td style="width: 232px;">
+                    <div class="underline" style="width: 232px;">{{ FBC_NAME }}</div>
+                    <br>
+                    <div class="tac dib fs75"> (фамилия, имя, отчество) </div>
+                </td>
+            </tr>
+            </table>
+        </div>
+        &nbsp;
+        <div>
+          <span class="fwb">9.</span> Получатель
+          {{ uw(RNAME, '100%') }}
+          <div class="tac" style="width: 100%;" >
+            (фамилия, имя, отчество и отношение к ребенку)
+          </div>
+          &nbsp;
+          {{ uw(RDOC, '100%') }}
+          <div class="tac" style="width: 100%;" >
+            (документ, удостоверяющий личность получателя, серия, номер, кем выдан)
+          </div>
+          &nbsp;
+        </div>
+        <div style="float: left;">
+          «{{ uw(DDD, '30px') }}»{{ uw(DDM, '84px') }}
+          {{ '20 ' if not DDY }}{{ us(DDY, 'border-bottom-style: dotted; width: 12px;') }} г.
+        </div>
+        <div style="text-align: right; float: right;">
+          Подпись получателя <div class="underline" style="width: 258px;"></div>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <table class="table" dth="694" cellpadding="4" cellspacing="0">
+          <colgroup>
+            <col width="380"/>
+            <col width="297"/>
+          </colgroup>
+          <tbody>
+            <tr class="line-spacing" valign="top">
+              <td class="table-cell--border-bottom table-cell--border-right" width="380" height="5">
+                <div>
+                  <span class="fwb">7.</span>
+                  Образование:
+                  <div class="ml38">
+                    <em>профессиональное:</em> высшее {{ ch(ME==1) }} , неполное высшее {{ ch(ME==2) }} ,
+                  </div>
+                  <div class="ml38">
+                    среднее {{ ch(ME==3) }} ,
+                    начальное {{ ch(ME==4) }} ;
+                  </div>
+                  <div class="ml38">
+                    <em>общее:</em>
+                    среднее (полное){{ ch(ME==5) }} ,
+                    основное {{ ch(ME==6) }} ,
+                    начальное {{ ch(ME==7) }} ;
+                  </div>
+                  <div class="ml38">
+                    не имеет начального образования {{ ch(ME==8) }} ; неизвестно {{ ch(ME==9) }}
+                  </div>
+                </div>
+                <div>
+                  <span class="fwb">8.</span>
+                  Занятость: <em>была занята в экономике</em>: руководители и специалисты
+                  <div class="ml38">
+                    высшего уровня квалификации {{ ch(MW==1) }} ,
+                    прочие специалисты {{ ch(MW==2) }} ,
+                  </div>
+                  <div class="ml38">
+                    квалифицированные рабочие {{ ch(MW==3) }} ,
+                    неквалифицированные рабочие {{ ch(MW==4) }} ,
+                  </div>
+                  <div class="ml38">
+                    занятые на военной службе {{ ch(MW==5) }};
+                    <em>не была занята в экономике</em>:
+                  </div>
+                  <div class="ml38">
+                    пенсионеры {{ ch(MW==6) }} ,
+                    студенты и учащиеся {{ ch(MW==7) }} , работавшие в личном
+                  </div>
+                  <div class="ml38">
+                    подсобном хозяйстве {{ ch(MW==8) }} ,
+                    безработные {{ ch(MW==9) }} ,
+                    прочие {{ ch(MW==10) }}.
+                  </div>
+                </div>
+                <div>
+                  <span class="fwb">9.</span>
+                  Срок первой явки к врачу (фельдшеру, акушерке)&nbsp; <div class="checkbox">{{MATT // 10 if MATT else '&nbsp;'|safe}}</div><div class="checkbox" style="border-left: none;">{{MATT % 10 if MATT else '&nbsp;'|safe}}</div> недель
+                </div>
+                <div>
+                  <span class="fwb">10.</span>
+                  Которым по счету ребенок был рожден у матери&nbsp; <div class="checkbox">{{CN // 10 if CN else '&nbsp;'|safe}}</div><div class="checkbox" style="border-left: none;">{{CN % 10 if CN else '&nbsp;'|safe}}</div>
+                </div>
+              </td>
+              <td class="table-cell--border-bottom" width="297">
+                <div>
+                  <span class="fwb">16.</span>
+                  Масса тела при рождении
+                  <div class="checkbox">{{CW[-4:-3]}}</div><div class="checkbox" style="border-left: none;">{{CW[-3:-2]}}</div><div class="checkbox" style="border-left: none;">{{CW[-2:-1]}}</div><div class="checkbox" style="border-left: none;">{{CW[-1:]}}</div> г
+                </div>
+                &nbsp;
+                <div>
+                  <span class="fwb">17.</span>
+                  Длина тела при рождении <div class="checkbox">{{CL[-2:-1]}}</div><div class="checkbox" style="border-left: none;">{{CL[-1:]}}</div> см
+                </div>
+                &nbsp;
+                <div>
+                  <span class="fwb">18.</span>
+                  Ребенок родился:
+                </div>
+                <div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; при одноплодных родах <div class="checkbox" style="float: right; margin-right: 50px;">{{'V' if SF else '&nbsp;'|safe}}</div>
+                </div>
+                <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; при многоплодных родах: которым по счету <div class="checkbox" style="float: right; margin-right: 50px;">{{MF_N if MF_N else '&nbsp;' | safe}}</div>
+                </div>
+                <div style="float: right; margin-right: 50px;">
+                  число родившихся&nbsp;&nbsp; {{ ch(MF_C, MF_C) }}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        &nbsp;
+        <div class="line-spacing">
+          <span class="fwb">19.</span>
+          Лицо, принимавшее роды:
+          <div style="margin-left: 5mm;">
+            врач-акушер-гинеколог {{ ch(WTB==1) }} ,
+            фельдшер, акушерка {{ ch(WTB==2) }} ,
+            другое лицо {{ ch(WTB==3) }}
+          </div>
+          &nbsp;
+        </div>
+
+        <div>
+          <span class="fwb">20.</span>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="width: 252px;">
+                        <div class="underline">{{ FBC_POST }}</div>
+                        <br>
+                        <div class="tac dib fs75">
+                            (должность врача (фельдшера, акушерки), заполнившего медицинское свидетельство)
+                        </div>
+                    </td>
+                    <td style="width: 150px;">
+                        <div class="underline" style="width: 138px;"></div>
+                        <br>
+                        <div class="tac dib fs75"> (подпись) </div>
+                    </td>
+                    <td style="width: 232px;">
+                        <div class="underline" style="width: 232px;">{{ FBC_NAME }}</div>
+                        <br>
+                        <div class="tac dib fs75"> (фамилия, имя, отчество) </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        &nbsp;
+        <div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="tac dib" style="width: 252px;">
+            {{ u(HEAD_CHOICE == 0, "Руководитель медицинской организации") }},<br>
+            {{ u(HEAD_CHOICE == 1, "врач, занимающийся частной практикой") }}
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="underline" style="width: 138px;"></div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {{ uw(HEAD_NAME, '232px') }}<br>
+
+
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="tac dib" style="width: 252px;">
+            (нужное подчеркнуть)
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="tac dib" style="width: 138px;">
+            (подпись)
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="tac dib" style="width: 232px;">
+            (фамилия, имя, отчество)
+          </div>
+        </div>
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+        <div>
+          Печать
+        </div>
+        <div class="bottom-footer">
+          К сведению родителей!<br>
+          В соответствие с пунктом 6 статьи 16 Федерального закона от 15.11.1997 г. №143-ФЗ "Об актах гражданского согласия"<br>
+          регистрация ребёнка в органе записи актов гражданского состояния (ЗАГС)<br>
+          должна быть проведена в месячный срок
+        </div>
+      </div>
+        {% if FOR_TEST %}<div class="test-print">{{ FOR_TEST_TEXT }}</div>{% endif %}
+    </div>
+  </div>
+</body>
+</html>

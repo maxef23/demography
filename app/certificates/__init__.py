@@ -1,0 +1,3 @@
+from app.certificates.BirthCertificate import BirthCertificateModel
+from app.certificates.DeathCertificate import DeathCertificateModel
+from app.certificates.PerinatalDeathCertificate import PerinatalDeathCertificateModel

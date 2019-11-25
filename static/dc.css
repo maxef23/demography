@@ -1,0 +1,140 @@
+* {
+	margin: 0;
+	font-family: "Times New Roman", Times, serif;
+}
+
+.page {
+	position: relative;
+	box-sizing: border-box;
+	width: 210mm;
+	height: 297mm;
+	margin: 50px auto;
+
+	border: 1px solid rgba(0, 0, 0, 0.4);
+
+	font-size: 8pt;
+}
+
+.test-print {
+	width: 300mm;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%) rotate(54.7369882619deg);
+
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 30pt;
+	letter-spacing: 50px;
+	color: rgba(0,0,0,.5);
+}
+
+.page-left {
+	padding: 7mm 6mm 5mm 15mm;
+}
+
+.page-right {
+	padding: 7mm 15mm 5mm 6mm;
+}
+
+.top {
+	height: 410px;
+}
+
+.cut-line {	
+	width: calc(100% - 21mm - 28px);
+	position: absolute;
+	top: 412px;
+
+	text-align: center;
+	border-bottom: 1px dashed black;
+}
+
+.bottom {
+	page-break-after: always;
+}
+
+.underline {
+	display: inline;
+	text-decoration: underline;
+}
+
+.underline-empty {
+	display: inline-block;
+	border-bottom: 1px solid black;
+}
+
+.underline:empty {
+	display: inline-block;
+	border-bottom: 1px solid black;
+}
+
+.checkbox {
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.fwb {
+	font-weight: bold;
+}
+
+.fs7 {
+	font-size: 7pt;
+}
+
+.fs85 {
+	font-size: 8.5pt;
+}
+
+.fs9 {
+	font-size: 9pt;
+}
+
+.fs10 {
+	font-size: 10pt;
+}
+
+.fs11 {
+	font-size: 11pt;
+}
+
+.fs12 {
+	font-size: 11pt;
+}
+
+.tac {
+	text-align: center;
+}
+
+.dib {
+	display: inline-block;
+}
+
+.ml3 {
+	margin-left: 3mm;
+}
+
+.line-spacing-proportional11 {
+	line-height: 9.9pt;
+}
+
+.table {
+	border-collapse: collapse;
+}
+
+.table-cell--border {
+	border: 1px solid black;
+}
+
+.table-cell--border-right {
+	border-right: 1px solid black;
+}
+
+.top-header {
+	margin-left: auto;
+	width: 11cm;
+	text-align: center;
+}

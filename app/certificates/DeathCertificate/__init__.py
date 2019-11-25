@@ -1,0 +1,1 @@
+from app.certificates.DeathCertificate.models import DeathCertificateModel

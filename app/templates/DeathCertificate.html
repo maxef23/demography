@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dc.css') }}">
+  <link rel="stylesheet" type="text/css" media="print" href="{{ url_for('static', filename='print.css') }}">
+</head>
+<body>
+  <div class="document">
+    <div class="page page-left">
+      <div class="top">
+        <div class="top-header fs7">
+          Приложение № 2<br>
+          к приказу Минздравсоцразвития России<br>
+          от 26декабря 2008 г. № 782н<br>
+          &nbsp;
+        </div>
+
+        <div class="fs10 tac">
+          <div class="fwb">
+            КОРЕШОК МЕДИЦИНСКОГО СВИДЕТЕЛЬСТВА О СМЕРТИ<br>
+            К УЧЕТНОЙ ФОРМЕ № 106/У-08<br>
+            СЕРИЯ <div class="underline" style="{{'width: 66px;' if not SERIAL}}'">{{SERIAL}}</div>
+            №<div class="underline" style="{{'width: 60px;' if not NUMBER}}'">{{NUMBER}}</div>
+          </div>
+          <div>
+            Дата выдачи
+            «<div class="underline" style="{{'width: 20px;' if not DDD}}">{{DDD}}</div>»
+            <div class="underline" style="{{'width: 100px;' if not DDM}}">{{DDM}}</div>
+            <div class="underline" style="{{'width: 20px;' if not DDY}}">{{DDY}}</div> г.
+          </div>
+          <div class="fwb">
+            ({{ u(T==1 and not IFINAL,"окончательного") }}, {{ u(T==0 and not IPRELIM, "предварительного") }}, {{ u(IPRELIM, "взамен предварительного") }}, {{ u(IFINAL, "взамен окончательного") }})
+          </div>
+          <div class="fwb fs9">
+            (<em>подчеркнуть</em>)
+          </div>
+          <div class="fwb">
+            серия {{ uw(P_SERIAL if T in (2,3), '54px') }}
+            №{{ uw(P_NUMBER if T in (2,3), '40px') }}
+            «{{ uw(P_DDD if T in (2,3), '20px') }}»
+            {{ uw(P_DDM if T in (2,3), '92px') }}
+            {{ uw(P_DDY if T in (2,3), '21px') }} г.
+          </div>
+        </div>
+        &nbsp;
+        <div class="line-spacing-proportional11 fs9">
+          <div>
+            <span class="fwb">1.</span>
+            Фамилия, имя, отчество умершего(ей) <div class="underline" style="{{'width: 482px;' if not FULL_NAME}}">{{FULL_NAME}}</div>
+          </div>
+          <div>
+            <span class="fwb">2.</span>
+            Пол: {% if P in (1, 2) or EMPTY %} мужской&nbsp; {{ ch(P==1) }} ,&nbsp; женский {{ ch(P==2) }} {% else %} неизвестно {% endif %}
+          </div>
+          <div>
+            <span class="fwb">3.</span>
+            Дата рождения:
+            число <div class="underline" style="{{'width: 36px;' if not BDD}}">{{BDD}}</div>,
+            месяц {{ uw(BDM, '90px') }},
+            год <div class="underline" style="{{'width: 66px;' if not BDY}}">{{BDY}}</div>
+          </div>
+          <div>
+            <span class="fwb">4.</span>
+            Дата смерти:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            число <div class="underline" style="{{'width: 36px;' if not DD_D}}">{{DD_D}}</div>,
+            месяц {{ uw(DD_M, '90px') }},
+            год <div class="underline" style="{{'width: 66px;' if not DD_Y}}">{{DD_Y}}</div>,
+            время <div class="underline" style="{{'width: 90px;' if not DD_T}}">{{DD_T}}</div>
+          </div>
+          <div>
+            <span class="fwb">5.</span>
+            Место постоянного жительства (регистрации) умершего(ей): республика, край, область <div class="underline" style="{{'width: 230px;' if not MRR}}">{{MRR}}</div>
+            <div class="ml3">
+              район <div class="underline" style="{{'width: 126px;' if not MRA}}">{{MRA}}</div>
+              город <div class="underline" style="{{'width: 138px;' if not MRC}}">{{MRC}}</div>
+              населенный пункт <div class="underline" style="{{'width: 250px;' if not MRL}}">{{MRL}}</div>
+            </div>
+            <div class="ml3">
+              улица <div class="underline" style="{{'width: 282px;' if not MRS}}">{{MRS}}</div>
+              дом <div class="underline" style="{{'width: 150px;' if not MRH}}">{{MRH}}</div>
+              кв. <div class="underline" style="{{'width: 171px;' if not MRF}}">{{MRF}}</div>
+            </div>
+          </div>
+          <div>
+            <span class="fwb">6.</span>
+            Смерть наступила:
+            на месте происшествия <div class="checkbox">{{'V' if DP==1 else '&nbsp;'|safe}}</div> ,
+            в машине скорой помощи <div class="checkbox">{{'V' if DP==2 else '&nbsp;'|safe}}</div> ,
+            в стационаре <div class="checkbox">{{'V' if DP==3 else '&nbsp;'|safe}}</div> ,
+            дома <div class="checkbox">{{'V' if DP==4 else '&nbsp;'|safe}}</div> ,
+            в другом месте <div class="checkbox">{{'V' if DP==5 else '&nbsp;'|safe}}</div>
+          </div>
+          <div>
+            <span class="fwb">Для детей, умерших в возрасте до 1 года:</span><br>
+            <span class="fwb">7.</span>
+            Дата рождения:
+            число {{ uw(BDD1, '30px') }},
+            месяц {{ uw(BDM1, '102px') }},
+            год {{ uw(BDY1, '60px') }},
+            число месяцев {{ uw(AGE_MONTHS, '60px') }},
+            дней жизни {{ uw(AGE_DAYS, '95px') }}
+          </div>
+          <div>
+            <span class="fwb">8.</span>
+            Место рождения <div class="underline" style="{{'width: 592px;' if not (B_PLACE and LE1)}}">{{B_PLACE if LE1}}</div>
+          </div>
+          <div>
+            <span class="fwb">9.</span>
+            Фамилия, имя, отчество матери <div class="underline" style="{{'width: 515px;' if not M_NAME}}">{{M_NAME}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cut-line">
+        ЛИНИЯ ОТРЕЗА
+      </div>
+
+      <div class="bottom">
+        <table class="table" width="685" cellpadding="7" cellspacing="0">
+          <colgroup>
+            <col width="287"/>
+            <col width="65"/>
+            <col width="288"/>
+          </colgroup>
+          <tbody>
+            <tr valign="top">
+              <td class="table-cell--border" width="287" style="border-bottom: none; padding: 0 1.9mm">
+                Министерство здравоохранения и социального развития<br>
+                Российской Федерации
+              </td>
+              <td width="65"></td>
+              <td class="table-cell--border" width="288" style="border-bottom: none; padding: 0 1.9mm">
+                Код формы по ОКУД <div class="underline" style="width: 102px;"></div>
+              </td>
+            </tr>
+            <tr valign="top">
+              <td class="table-cell--border" width="287" height="66" style="border-top: none; padding: 0 1.9mm">
+                Наименование медицинской организации<br>
+                <div class="underline" style="width: 262px;">{{ ORGNAME }}</div><br>
+                адрес <div class="underline" style="{{ 'width: 235px;' if not OADDR}}">{{ OADDR }}</div><br>
+                Код по ОКПО <div class="underline" style="{{ 'width: 197px;' if not OKPO}}">{{ OKPO }}</div><br>
+                Для врача, занимающегося частной практикой:<br>
+                номер лицензии на медицинскую деятельность <div class="underline" style="width: 63px;"></div><br>
+                адрес <div class="underline" style="width: 251px;"></div>
+              </td>
+              <td width="65"></td>
+              <td class="table-cell--border" width="288" style="border-top: none; padding: 0 1.9mm">
+                Медицинская документация<br>
+                Учетная форма № 106/у-08<br>
+                Утверждена приказом Минздравсоцразвития России<br>
+                от 26.12.2008 г. № 782н<br><br>
+                  {{ FILLED_BY }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="tac fs10">
+          <div class="fwb">
+            <br>
+            МЕДИЦИНСКОЕ СВИДЕТЕЛЬСТВО О СМЕРТИ<br>
+            СЕРИЯ <div class="underline" style="{{'width: 80px;' if not SERIAL}}">{{SERIAL}}</div> №<div class="underline" style="{{'width: 40px;' if not NUMBER}}">{{NUMBER}}</div>
+          </div>
+          <div>
+            Дата выдачи «<div class="underline" style="{{'width: 34px;' if not DDD}}">{{DDD}}</div>»
+            <div class="underline" style="{{'width: 100px;' if not DDM}}">{{DDM}}</div>
+            <div class="underline" style="{{'width: 46px;' if not DDY}}">{{DDY}}</div> г.
+          </div>
+          <div class="fwb">
+            ({{ u(T==1, "окончательное") }}, {{ u(T==0 and not IPRELIM, "предварительное") }}, {{ u(IPRELIM, "взамен предварительного") }}, {{ u(IFINAL, "взамен окончательного") }}) (<em>подчеркнуть</em>)<br>
+            серия {{ uw(P_SERIAL if T in (2,3), '66px') }}
+            №{{ uw(P_NUMBER if T in (2,3), '20px') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            «{{ uw(P_DDD if T in (2,3), '20px') }}»
+            {{ uw(P_DDM if T in (2,3), '66px') }}
+            {{ uw(P_DDY if T in (2,3), '20px') }} г.
+          </div>
+        </div>
+
+        <div class="fs9">
+          <div>
+            <span class="fwb">1.</span>
+            Фамилия, имя, отчество умершего(ей) <div class="underline" style="{{'width: 482px;' if not FULL_NAME}}">{{FULL_NAME}}</div>
+          </div>
+          <div>
+            <span class="fwb">2.</span>
+            Пол: {% if P in (1, 2) or EMPTY %}мужской&nbsp; {{ ch(P==1) }} ,&nbsp; женский {{ ch(P==2) }} {% else %} неизвестно {% endif %}
+          </div>
+          <div>
+            <span class="fwb">3.</span>
+            Дата рождения:
+            число <div class="underline" style="{{'width: 36px;' if not BDD}}">{{BDD}}</div>,
+            месяц {{ uw(BDM, '90px') }},
+            год <div class="underline" style="{{'width: 66px;' if not BDY}}">{{BDY}}</div>
+          </div>
+          <div>
+            <span class="fwb">4.</span>
+            Дата смерти:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            число <div class="underline" style="{{'width: 36px;' if not DD_D}}">{{DD_D}}</div>,
+            месяц {{ uw(DD_M, '90px') }},
+            год <div class="underline" style="{{'width: 66px;' if not DD_Y}}">{{DD_Y}}</div>,
+            время <div class="underline" style="{{'width: 90px;' if not DD_T}}">{{DD_T}}</div>
+          </div>
+          <div>
+            <span class="fwb">5.</span>
+            Место постоянного жительства (регистрации) умершего(ей): республика, край, область <div class="underline" style="{{'width: 230px;' if not MRR}}">{{MRR}}</div>
+            <div class="ml3">
+              район <div class="underline" style="{{'width: 126px;' if not MRA}}">{{MRA}}</div>
+              город <div class="underline" style="{{'width: 138px;' if not MRC}}">{{MRC}}</div>
+              населенный пункт <div class="underline" style="{{'width: 250px;' if not MRL}}">{{MRL}}</div>
+            </div>
+            <div class="ml3">
+              улица <div class="underline" style="{{'width: 282px;' if not MRS}}">{{MRS}}</div>
+              дом <div class="underline" style="{{'width: 150px;' if not MRH}}">{{MRH}}</div>
+              кв. <div class="underline" style="{{'width: 171px;' if not MRF}}">{{MRF}}</div>
+            </div>
+          </div>
+          <div>
+            <span class="fwb">6.</span>
+            Местность:&nbsp; городская {{ ch(LOC==1) }} , сельская {{ ch(LOC==2) }}
+          </div>
+          <div>
+            <span class="fwb">7.</span>
+            Место смерти: республика , край, область <div class="underline" style="{{'width:463px;' if not DPR}}">{{DPR}}</div>
+            <div class="ml3">
+              район <div class="underline" style="{{'width: 126px;' if not DPA}}">{{DPA}}</div>
+              город <div class="underline" style="{{'width: 138px;' if not DPC}}">{{DPC}}</div>
+              населенный пункт <div class="underline" style="{{'width: 250px;' if not DPL}}">{{DPL}}</div>
+            </div>
+            <div class="ml3">
+              улица <div class="underline" style="{{'width: 282px;' if not DPS}}">{{DPS}}</div>
+              дом <div class="underline" style="{{'width: 150px;' if not DPH}}">{{DPH}}</div>
+              кв. <div class="underline" style="{{'width: 171px;' if not DPF}}">{{DPF}}</div>
+            </div>
+          </div>
+          <div>
+            <span class="fwb">8.</span>
+            Местность:&nbsp; городская {{ ch(DLOC==1) }} , сельская {{ ch(DLOC==2) }}
+          </div>
+          <div>
+            <span class="fwb">9.</span>
+            Смерть наступила:
+            на месте происшествия {{ ch(DP==1) }} ,
+            в машине скорой помощи {{ ch(DP==2) }} ,
+            в стационаре {{ ch(DP==3) }} ,
+            дома {{ ch(DP==4) }} ,
+            в другом месте {{ ch(DP==5) }} .
+          </div>
+          <div>
+            <span class="fwb">10.</span>
+            Для детей, умерших в возрасте от 168 час. до 1 месяца:
+            доношенный (37-41 недель) {{ch(CP==1)}} ,
+            недоношенный (менее 37 недель) {{ch(CP==2)}} ,
+            <div class="ml3">
+              переношенный (42 недель и более) {{ch(CP==3)}} .
+            </div>
+          </div>
+          <div>
+            <span class="fwb">11.</span>
+            Для детей, умерших в возрасте от 168 час. до 1 года:<br>
+            <div class="ml3">
+              масса тела ребенка при рождении {{uw(CBY_W, '72px')}} грамм {{ch(CBY_W)}} , каким по счету был
+              ребенок у матери (считая умерших и не считая мерт-
+            </div>
+            <div class="ml3">
+              ворожденных) {{uw(CBY_N, '42px')}} {{ch(CBY_N)}} ,
+              дата рождения матери {{ uw(M_DOB, '90px') }} {{ch(M_DOB)}} ,
+              возраст матери (полных лет) {{ uw(M_AGE, '66px') }} {{ch(M_AGE)}} ,
+            </div>
+            <div class="ml3">
+              фамилия матери {{uw(M_FAM, '156px')}} {{ch(M_FAM)}} ,
+              имя {{uw(M_NAME1, '120px')}} {{ ch(M_NAME1) }} ,
+              отчество {{uw(M_NAME2, '132px')}} {{ch(M_NAME2)}}<br>
+            </div>
+          </div>
+          <div>
+            <span class="fwb">12.*</span>
+            Семейное положение:
+            состоял(а) в зарегистрированном браке {{ch(MMS==1)}} ,
+            не состоял(а) в зарегистрированном браке {{ ch(MMS==2) }} ,
+            неизвестно {{ ch(MMS==3) }} .
+          </div>
+          <div>
+            <span class="fwb">13.*</span>
+            Образование: <em>профессиональное</em>:
+            высшее {{ ch(ME==1) }} ,
+            неполное высшее {{ ch(ME==2) }} ,
+            среднее {{ ch(ME==3) }} ,
+            начальное {{ ch(ME==4) }} ;
+            <em>общее</em>: среднее (полное) {{ ch(ME==5) }} ,
+            <div class="ml3">
+              основное {{ ch(ME==6) }} ,
+              начальное {{ ch(ME==7) }} ;
+              не имеет начального образования {{ ch(ME==8) }} ;
+              неизвестно {{ ch(ME==9) }} .
+            </div>
+          </div>
+          <div>
+            <span class="fwb">14.*</span>
+            Занятость: <em>был(а) занят(а) в экономике</em>:
+            руководители и специалисты высшего уровня квалификации {{ ch(MW==1) }} , прочие
+            <div class="ml3">
+              специалисты {{ ch(MW==2) }} ,
+              квалифицированные рабочие {{ ch(MW==3) }} ,
+              неквалифицированные рабочие {{ ch(MW==4) }}
+              , занятые на военной службе {{ ch(MW==5) }} ;
+            </div>
+            <div class="ml3">
+              <em>не был(а) занят(а) в экономике</em>:
+              пенсионеры {{ ch(MW==6) }} ,
+              студенты и учащиеся {{ ch(MW==7) }} ,
+              работавшие в личном подсобном хозяйстве {{ ch(MW==8) }} ,
+            </div>
+            <div class="ml3">
+              безработные {{ ch(MW==9) }} , прочие {{ ch(MW==10) }} .
+            </div>
+          </div>
+          <div>
+            <span class="fwb">15.</span>
+            Смерть произошла:
+            от заболевания {{ ch(DR==1) }} ;
+            <em>несчастного случая</em>: не
+            связанного с производством {{ ch(DR==2) }} ,
+            связанного с производством {{ ch(DR==3) }} ;
+            <div class="ml3">
+              убийства {{ ch(DR==4) }} ;
+              самоубийства {{ ch(DR==5) }} ;
+              <em>в ходе действий:</em> военных {{ ch(DR==6) }} ,
+              террористических {{ ch(DR==7) }} ;
+              род смерти не установлен {{ ch(DR==8) }} .
+            </div>
+          </div>
+        </div>
+
+        <div class="fs8">
+          _________________________<br>
+          <span class="fwb">*</span>
+          В случае смерти детей, возраст которых указан а пунктах 10-11, пункты. 12 - 14 заполняются в отношении их матерей.
+        </div>
+      </div>
+      {% if FOR_TEST %}<div class="test-print">{{ FOR_TEST_TEXT }}</div>{% endif %}
+    </div>
+
+    <div class="page page-right">
+      <div class="top">
+        <div class="fs9" style="text-align: right;">
+          оборотная сторона
+        </div>
+
+        <table class="table" width="105.3%" cellpadding="5" cellspacing="0">
+          <colgroup>
+            <col width="184*"/>
+            <col width="37*"/>
+            <col width="36*"/>
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="table-cell--border-right fs85" width="40%" valign="top" style="padding: 0;">
+                <span class="fwb">10.</span>
+                Причины смерти:
+              </td>
+              <td class="table-cell--border-right tac" width="46%" valign="top" style="padding: 0 1.3mm;">
+                Приблизительный
+                период времени
+                между началом патологического процесса и смертью
+              </td>
+              <td class="tac" width="14%" style="padding: 0 1.3mm;">
+                Код по МКБ-10
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="table-cell--border-right" width="72%" style="padding-bottom: 0;">
+                <div>
+                  I. а)<div class="underline-empty dib" style="width: 459px;">{{ DR1 }}</div>
+                </div>
+                <div class="tac">
+                  (болезнь или состояние, непосредственно приведшее к смерти)
+                </div>
+              </td>
+              <td class="table-cell--border-right tac" width="14%" style="padding-bottom: 0;">
+                <div class="underline-empty" style="width: 100%;">{{ DP1 }}</div>
+              </td>
+              <td width="14%" style="padding-bottom: 0;">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="center">
+                      <td class="table-cell--border tac" width="16" height="17">{{ MKB1[:1] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB1[1:2] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB1[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB1[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="table-cell--border-right" width="72%" style="padding: 1mm 1.3mm;">
+                &nbsp;&nbsp; б)<div class="underline-empty" style="width: 459px;">{{ DR2 }}</div>
+                <div class="tac">
+                  (патологическое состояние, которое привело к возникновению вышеуказанной причины)
+                </div>
+              </td>
+              <td class="table-cell--border-right tac" width="14%" style="padding: 1mm 1.3mm;">
+                <div class="underline-empty" style="width: 100%;">{{ DP2 }}</div>
+              </td>
+              <td width="14%">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="center">
+                      <td class="table-cell--border tac" width="16" height="17">{{ MKB2[:1] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB2[1:2] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB2[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB2[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="table-cell--border-right" width="72%" style="padding: 0 1.3mm;">
+                &nbsp;&nbsp;&nbsp;в)<div class="underline-empty" style="width: 459px;">{{ DR3 }}</div>
+                <div class="tac">
+                  (первоначальная причина смерти указывается последней)
+                </div>
+              </td>
+              <td class="table-cell--border-right tac" width="14%" style="padding: 0 1.3mm;">
+                <div class="underline-empty" style="width: 100%">{{ DP3 }}</div>
+              </td>
+              <td width="14%">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="center">
+                      <td class="table-cell--border tac" width="16" height="17">{{ MKB3[:1] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB3[1:2] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB3[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB3[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="table-cell--border-right" width="72%" style="padding: 0 1.3mm;">
+                &nbsp;&nbsp;&nbsp;г)<div class="underline-empty" style="width: 459px;">{{ DR4 }}</div>
+                <div class="tac">
+                  (внешняя причина при травмах и отравлениях)
+                </div>
+              </td>
+              <td class="table-cell--border-right tac" width="14%" style="padding: 0 1.3mm;">
+                <div class="underline-empty" style="width: 100%;">{{ DP4 }}</div>
+              </td>
+              <td width="14%">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="center">
+                      <td class="table-cell--border tac" width="16" height="17">{{ MKB4[:1] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB4[1:2] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB4[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB4[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td width="72%" style="padding: 0 1.3mm;" colspan="3">
+                II. Прочие важные состояния, способствовавшие смерти, но не связанные с болезнью или
+                патологическим состоянием, приведшим к ней, включая употребление алкоголя, наркотических
+                средств, психотропных и других токсических веществ, содержание их в крови, а также операции
+                (название, дата)
+              </td>
+            </tr>
+            <tr class="fs85" valign="bottom">
+              <td width="72%" style="padding: 0 1.3mm;">
+                <div class="underline-empty" style="width: 476px;">{{ DR5 }}</div>
+              </td>
+              <td class="tac" width="14%" style="padding: 0 1.3mm;">
+                <div class="underline-empty" style="width: 100%">{{ DP5 }}</div>
+              </td>
+              <td width="14%" style="padding: 0;">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="center">
+                      <td class="table-cell--border tac" width="16" height="17">{{ MKB5[:1] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB5[1:2] }}</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB5[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border tac" width="17">{{ MKB5[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="fs9" style="margin-top: 3px;">
+          <div>
+            <span class="fwb">11.</span>
+            В случае смерти в результате ДТП:
+            смерть наступила – в течение 30 суток {{ ch(DTP==2) }} ,
+            из них в течение 7 суток {{ ch(DTP7) }} .
+          </div>
+          <div>
+            <span class="fwb">12.</span>
+            В случае смерти беременной (независимо от срока и локализации) {{ ch(0) }} ,
+            в процессе родов (аборта) {{ ch(PREGD==1) }} , в течение 42 дней после
+            <div class="ml3">
+              окончания беременности,
+              родов (аборта) {{ ch(PREGD==2) }} ;
+              кроме того в течение 43-365 дней после окончания беременности, родов {{ ch(PREGD==3) }}
+            </div>
+          </div>
+          <div>
+            <span class="fwb">13.</span>
+            Фамилия, имя, отчество врача (фельдшера, акушерки), заполнившего Медицинское свидетельство о смерти<br>
+            <div class="ml3">
+              <div class="underline" style="width: 456px;">{{ FILLNAME }}</div>&nbsp;&nbsp; Подпись <div class="underline" style="width: 150px;"></div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <span class="fwb">14.</span>
+              Фамилия, имя, отчество получателя <div class="underline" style="width: 263px;">{{ RNAME }}</div>
+            </div>
+            <div class="ml3">
+              Документ, удостоверяющий личность получателя (серия, номер, кем выдан) <div class="underline" style="width: 268px;">{{ RDOC }}</div>
+            </div>
+            <div class="dib ml3">
+              «<div class="underline" style="width: 30px;">{{ DDD }}</div>»
+              <div class="underline" style="width: 84px;">{{ DDM }}</div>
+              <div class="underline" style="{{ 'width: 18px;' if not DDY}}">{{ DDY }}</div> г
+            </div>
+            <div style="float: right; margin-right: 40px;">
+              Подпись получателя <div class="underline" style="width: 156px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cut-line" style="width: calc(100% - 21mm);">
+        ЛИНИЯ ОТРЕЗА
+      </div>
+
+      <div class="bottom">
+        <div class="fs9">
+          <div style="text-align: justify;">
+            <span class="fwb">16.</span>
+            В случае смерти от несчастного случая, убийства, самоубийства, от военных и террористических действий, при неустановленном роде
+
+            смерти - указать дату травмы (отравления):
+            число {{ uw(TD_D, '24px') }}
+            месяц {{ uw(month_name(TD_M), '72px') }},
+            год {{ uw(TD_Y, '42px') }},
+            время {{ uw(TD_T, '36px') }}, а также место и обстоятельства,
+
+            при которых произошла травма (отравление) {{ uw(TRAUMA, '440px') }}<br>
+
+            <div class="underline" style="width: 672px;"></div>
+          </div>
+          <div style="text-align: justify;">
+            <span class="fwb">17.</span>
+            Причины смерти установлены:
+            врачом, только установившим смерть {{ ch(WTD==1) }} ,
+            лечащим врачом {{ ch(WTD==2) }} ,
+            фельдшером (акушеркой) {{ ch(WTD==3) }} , па-
+            тологоанатомом {{ ch(WTD==4) }} ,
+            судебно-медицинским экспертом {{ ch(WTD==5) }} .
+          </div>
+          <div>
+            <span class="fwb">18.</span>
+            Я, врач (фельдшер, акушерка) {{ uw(WTD_NAME, '498px') }} ,
+            <div class="tac" style="font-size: 8pt;">
+              (фамилия, имя, отчество)
+            </div>
+            должность {{ uw(WTD_POST, '615px') }} ,
+            <div style="text-align: justify;">
+              удостоверяю, что на основании: осмотра трупа {{ ch(DRB==1) }} ,
+              записей в медицинской документации {{ ch(DRB==2) }} , предшествующего наблюдения
+              за больным(ой) {{ ch(DRB==3) }} ,
+              вскрытия {{ ch(DRB==4) }} мною определена последовательность патологических процессов (состояний), приведших к
+              смерти, и установлены причины смерти.
+            </div>
+          </div>
+        </div>
+
+        <table class="table" width="100%" cellpadding="5" cellspacing="0">
+          <colgroup>
+            <col width="184*"/>
+            <col width="37*"/>
+            <col width="36*"/>
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="table-cell--border-right fs85" width="72%" valign="top" style="padding: 0;">
+                <span class="fwb">19.</span>
+                Причины смерти:
+              </td>
+              <td class="table-cell--border-right tac" width="14%" valign="top" style="padding: 0 1.3mm;">
+                Приблизительный
+                период времени
+                между началом па-
+                тологического про-
+                цесса и смертью
+              </td>
+              <td class="tac" width="14%" style="padding: 0 1.3mm;">
+                Код по МКБ-10
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="table-cell--border-right" width="72%" style="padding-bottom: 0;">
+                <div>
+                  I. а)<div class="underline" style="width: 459px;">{{ DR1 }}</div>
+                </div>
+              </td>
+              <td class="table-cell--border-right" width="14%" style="padding-bottom: 0;">
+                <div class="underline" style="width: 85px;">{{ DP1 }}</div>
+              </td>
+              <td width="14%" style="padding-bottom: 0;" rowspan="2">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="bottom">
+                      <td class="table-cell--border" width="16" height="17">{{ MKB1[:1] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB1[1:2] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB1[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border" width="17">{{ MKB1[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="tac table-cell--border-right" width="72%" style="padding: 0;">
+                (болезнь или состояние, непосредственно приведшее к смерти)
+              </td>
+              <td class="table-cell--border-right" width="14%" style="padding: 0;"></td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="table-cell--border-right" width="72%" style="padding: 0 1.3mm;">
+                &nbsp;&nbsp; б)<div class="underline" style="width: 459px;">{{ DR2 }}</div>
+              </td>
+              <td class="table-cell--border-right" width="14%" style="padding: 0 1.3mm;">
+                <div class="underline" style="width: 85px;">{{ DP2 }}</div>
+              </td>
+              <td width="14%" rowspan="2">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="bottom">
+                      <td class="table-cell--border" width="16" height="17">{{ MKB2[:1] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB2[1:2] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB2[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border" width="17">{{ MKB2[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="tac table-cell--border-right" width="72%" style="padding: 0;">
+                (патологическое состояние, которое привело к возникновению вышеуказанной причины)
+              </td>
+              <td width="14%" style="padding: 0;"></td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="table-cell--border-right" width="72%" style="padding: 0 1.3mm;">
+                &nbsp;&nbsp;&nbsp;в)<div class="underline" style="width: 459px;">{{ DR3 }}</div>
+              </td>
+              <td class="table-cell--border-right" width="14%" style="padding: 0 1.3mm;">
+                <div class="underline" style="width: 85px;">{{ DP3 }}</div>
+              </td>
+              <td width="14%" rowspan="2">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="bottom">
+                      <td class="table-cell--border" width="16" height="17">{{ MKB3[:1] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB3[1:2] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB3[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border" width="17">{{ MKB3[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="tac table-cell--border-right" width="72%" style="padding: 0;">
+                (первоначальная причина смерти указывается последней)
+              </td>
+              <td width="14%" style="padding: 0;"></td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="table-cell--border-right" width="72%" style="padding: 0 1.3mm;">
+                &nbsp;&nbsp;&nbsp;г)<div class="underline" style="width: 459px;">{{ DR4 }}</div>
+              </td>
+              <td class="table-cell--border-right" width="14%" style="padding: 0 1.3mm;">
+                <div class="underline" style="width: 85px;">{{ DP4 }}</div>
+              </td>
+              <td width="14%" rowspan="2">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="bottom">
+                      <td class="table-cell--border" width="16" height="17">{{ MKB4[:1] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB4[1:2] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB4[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border" width="17">{{ MKB4[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td class="tac table-cell--border-right" width="72%" style="padding: 0;">
+                (внешняя причина при травмах и отравлениях)
+              </td>
+              <td width="14%" style="padding: 0;"></td>
+            </tr>
+            <tr class="fs85" valign="top">
+              <td width="72%" style="padding: 0 1.3mm;">
+                II. Прочие важные состояния, способствовавшие смерти, но не связанные с болезнью или<br>
+                патологическим состоянием, приведшим к ней, включая употребление алкоголя, наркотических<br>
+                средств, психотропных и других токсических веществ, содержание их в крови, а также операции<br>
+                (название, дата)
+              </td>
+              <td width="14%" style="padding: 0;"></td>
+              <td width="14%" style="padding: 0;"></td>
+            </tr>
+            <tr class="fs85" valign="bottom">
+              <td width="72%" style="padding: 0 1.3mm;">
+                <div class="underline" style="width: 476px;">{{ DR5 }}</div>
+              </td>
+              <td width="14%" style="padding: 0 1.3mm;">
+                <div class="underline" style="width: 85px;">{{ DP5 }}</div>
+              </td>
+              <td width="14%" style="padding: 0;">
+                <table class="table" width="78" cellpadding="0" cellspacing="0" style="margin: auto;">
+                  <colgroup>
+                    <col width="16"/>
+                    <col width="17"/>
+                    <col width="17"/>
+                    <col width="9"/>
+                    <col width="17"/>
+                  </colgroup>
+                  <tbody>
+                    <tr valign="bottom">
+                      <td class="table-cell--border" width="16" height="17">{{ MKB5[:1] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB5[1:2] }}</td>
+                      <td class="table-cell--border" width="17">{{ MKB5[2:3] }}</td>
+                      <td class="tac fwb" width="9">.</td>
+                      <td class="table-cell--border" width="17">{{ MKB5[4:5] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="fs9">
+          <div>
+            <span class="fwb">20.</span>
+            В случае смерти в результате ДТП: смерть наступила – в течение 30 суток {{ ch(DTP==2) }} ,
+            из них в течение 7 суток {{ ch(DTP7) }} .
+          </div>
+          <div>
+            <span class="fwb">21.</span>
+            В случае смерти беременной (независимо от срока и локализации) {{ ch(PREGD) }} , в
+            процессе родов (аборта) {{ ch(PREGD==1) }} , в течение 42 дней после
+            <div class="ml3">
+              окончания беременности, родов (аборта) {{ ch(PREGD==2) }} ;
+              кроме того в течение 43-365 дней после окончания беременности, родов
+              {{ ch(PREGD==3) }} .
+            </div>
+          </div>
+          <div>
+            <span class="fwb">22.</span>
+            Фамилия, имя, отчество врача (фельдшера, акушерки), заполнившего Медицинское свидетельство о смерти
+            <div class="ml3">
+              <div class="underline" style="width: 348px;">{{ FILLNAME }}</div>
+              Подпись <div class="underline" style="width: 168px;"></div>
+            </div>
+
+            {{ u(M_CHOICE==0, "Руководитель медицинской организации,") }}<br>
+            <div class="dib" style="width: 240px;">
+              {{ u(M_CHOICE==1, "частнопрактикующий врач") }} (подчеркнуть)
+            </div>
+            <div class="dib tac" style="width: 170px;">
+              <div class="underline" style="width: 150px"></div>
+            </div>
+            <div class="dib tac">
+              <div class="underline" style="width: 294px">{{ HEADNAME }}</div>
+            </div>
+             <div class="dib tac" style="margin-left: 240px; width: 170px;">
+              (подпись)
+            </div>
+            <div class="dib tac" style="width: 294px">
+              (фамилия, имя, отчество)
+            </div>
+            <div style="margin-left: 51px;">
+              Печать
+            </div>
+          </div>
+          <div style="border-bottom: 2px solid black; margin-bottom: 3px;">
+            &nbsp;
+          </div>
+          <div>
+            <span class="fwb">23.</span>
+            Свидетельство проверено врачом, ответственным за правильность заполнения медицинских свидетельств.
+            <div class="dib tac" style="width: 235px; margin-top: 5px;">
+              «<div class="underline" style="width: 18px;">{{ DDD }}</div>»
+              <div class="underline" style="width: 66px;">{{ DDM }}</div>
+              <div class="underline" style="{{ 'width: 18px;' if not DDY }}">{{ DDY }}</div> г.
+            </div>
+            <div class="dib tac" style="width: 200px;">
+              <div class="underline" style="width: 174px"></div>
+            </div>
+            <div class="dib tac">
+              <div class="underline" style="width: 270px">{{ CHECKNAME }}</div>
+            </div>
+            <div class="dib tac" style="margin-left: 235px; width: 200px;">
+              (подпись)
+            </div>
+            <div class="dib tac" style="width: 270px">
+              (фамилия, имя, отчество врача)
+            </div>
+          </div>
+        </div>
+      </div>{% if FOR_TEST %}<div class="test-print">{{ FOR_TEST_TEXT }}</div>{% endif %}
+    </div>
+  </div>
+</body>
+</html> 
